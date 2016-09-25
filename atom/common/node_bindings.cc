@@ -12,6 +12,7 @@
 #include "atom/common/atom_command_line.h"
 #include "atom/common/native_mate_converters/file_path_converter.h"
 #include "atom/common/node_includes.h"
+#include "atom/browser/api/atom_api_local_file.cc"
 #include "base/command_line.h"
 #include "base/base_paths.h"
 #include "base/environment.h"
@@ -35,6 +36,7 @@ REFERENCE_MODULE(atom_browser_app);
 REFERENCE_MODULE(atom_browser_auto_updater);
 REFERENCE_MODULE(atom_browser_content_tracing);
 REFERENCE_MODULE(atom_browser_dialog);
+REFERENCE_MODULE(atom_browser_local_file);
 REFERENCE_MODULE(atom_browser_debugger);
 REFERENCE_MODULE(atom_browser_desktop_capturer);
 REFERENCE_MODULE(atom_browser_download_item);
