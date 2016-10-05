@@ -71,6 +71,7 @@
       'default_app/default_app.js',
       'default_app/index.html',
       'default_app/main.js',
+      'default_app/app.js',
       'default_app/package.json',
     ],
     'lib_sources': [
@@ -97,6 +98,9 @@
       'atom/browser/api/atom_api_download_item.cc',
       'atom/browser/api/atom_api_download_item.h',
       'atom/browser/api/atom_api_local_file.cc',
+      'atom/browser/api/atom_api_local_file.h',
+      'atom/browser/api/atom_api_local_file_mac.h',
+      'atom/browser/api/atom_api_local_file_mac.mm',
       'atom/browser/api/atom_api_dialog.cc',
       'atom/browser/api/atom_api_global_shortcut.cc',
       'atom/browser/api/atom_api_global_shortcut.h',

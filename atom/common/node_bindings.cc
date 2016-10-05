@@ -12,7 +12,6 @@
 #include "atom/common/atom_command_line.h"
 #include "atom/common/native_mate_converters/file_path_converter.h"
 #include "atom/common/node_includes.h"
-#include "atom/browser/api/atom_api_local_file.cc"
 #include "base/command_line.h"
 #include "base/base_paths.h"
 #include "base/environment.h"
