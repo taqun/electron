@@ -12,7 +12,6 @@ namespace atom {
 namespace api {
 
   std::string LocalFile::CreateBookmark(const std::string& path) {
-    
     NSString* pathString = [NSString stringWithUTF8String:path.c_str()];
     NSURL* url = [NSURL fileURLWithPath:pathString];
 
@@ -25,10 +24,9 @@ namespace api {
     NSData* data = [url bookmarkDataWithOptions:bookmarkOptions includingResourceValuesForKeys:nil relativeToURL:nil error:&error];
 
     if(error) {
-      NSString* errorDesc = [[NSNumber numberWithInt:[error code]] stringValue];
-      return std::string([errorDesc UTF8String]);
-      // return std::string([[error localizedDescription] UTF8String]);
-      // return std::string([[error localizedFailureReason] UTF8String]);
+      // NSString* errorDesc = [[NSNumber numberWithInt:[error code]] stringValue];
+      // return std::string([errorDesc UTF8String]);
+      return std::string([[error localizedDescription] UTF8String]);
     }
 
     if(!data) {
@@ -39,7 +37,27 @@ namespace api {
   }
 
   std::string LocalFile::ResolveBookmark(const std::string& path) {
-    return "resolve";
+    NSString* bookmarkString = [NSString stringWithUTF8String:path.c_str()];
+    NSData* bookmark = [[NSData alloc] initWithBase64EncodedString:bookmarkString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+    int bookmarkOptions = NSURLBookmarkCreationMinimalBookmark;
+#if defined(MAS_BUILD)
+    bookmarkOptions = NSURLBookmarkCreationWithSecurityScope;
+#endif
+
+    NSError* error = nil;
+    NSURL *url = [NSURL URLByResolvingBookmarkData:bookmark options:bookmarkOptions relativeToURL:nil bookmarkDataIsStale:nil error:&error];
+
+    if(error) {
+      // NSString* errorDesc = [[NSNumber numberWithInt:[error code]] stringValue];
+      // return std::string([errorDesc UTF8String]);
+      return std::string([[error localizedDescription] UTF8String]);
+    }
+
+    if(!url) {
+      return "no url";
+    }
+    return std::string([[url absoluteString] UTF8String]);
   }
 
 }  // api

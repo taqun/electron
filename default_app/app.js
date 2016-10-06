@@ -7,7 +7,9 @@ dialog.showOpenDialog(
   function(filenames){
     let filepath = filenames[0];
     let bookmark = localFile.createBookmark(filepath);
-    console.log(filepath);
     console.log(bookmark);
+
+    let resolvedUrl = localFile.resolveBookmark(bookmark);
+    console.log(resolvedUrl);
   }
 );
