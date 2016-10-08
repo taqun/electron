@@ -60,6 +60,26 @@ namespace api {
     return std::string([[url absoluteString] UTF8String]);
   }
 
+  int LocalFile::StartAccessingSecurityScopedResource(const std::string& path) {
+    NSString* pathString = [NSString stringWithUTF8String:path.c_str()];
+    NSURL* url = [NSURL fileURLWithPath:pathString];
+
+    int isSuccess = [url startAccessingSecurityScopedResource];
+    if(isSuccess == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool LocalFile::StopAccessingSecurityScopedResource(const std::string& path) {
+    NSString* pathString = [NSString stringWithUTF8String:path.c_str()];
+    NSURL* url = [NSURL fileURLWithPath:pathString];
+
+    [url stopAccessingSecurityScopedResource];
+    return true;
+  }
+
 }  // api
 
 } // atom

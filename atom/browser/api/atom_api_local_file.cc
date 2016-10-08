@@ -15,6 +15,8 @@ namespace {
 #if defined(OS_MACOSX)
     dict.SetMethod("createBookmark", &LocalFile::CreateBookmark);
     dict.SetMethod("resolveBookmark", &LocalFile::ResolveBookmark);
+    dict.SetMethod("startAccessingSecurityScopedResource", &LocalFile::StartAccessingSecurityScopedResource);
+    dict.SetMethod("stopAccessingSecurityScopedResource", &LocalFile::StopAccessingSecurityScopedResource);
 #endif
   }
 
