@@ -42,7 +42,7 @@ namespace api {
 
     int bookmarkOptions = NSURLBookmarkCreationMinimalBookmark;
 #if defined(MAS_BUILD)
-    bookmarkOptions = NSURLBookmarkCreationWithSecurityScope;
+    bookmarkOptions = NSURLBookmarkResolutionWithSecurityScope;
 #endif
 
     NSError* error = nil;
