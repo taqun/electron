@@ -57,12 +57,16 @@ namespace api {
     if(!url) {
       return "no url";
     }
-    return std::string([[url absoluteString] UTF8String]);
+    return std::string([[url path] UTF8String]);
   }
 
-  int LocalFile::StartAccessingSecurityScopedResource(const std::string& path) {
-    NSString* pathString = [NSString stringWithUTF8String:path.c_str()];
-    NSURL* url = [NSURL fileURLWithPath:pathString];
+  int LocalFile::StartAccessingSecurityScopedResource(const std::string& bookmarkString) {
+    NSString* bkString = [NSString stringWithUTF8String:bookmarkString.c_str()];
+    NSData *bookmark = [[NSData alloc] initWithBase64EncodedString:bkString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+    int bookmarkOptions = NSURLBookmarkResolutionWithSecurityScope;
+    NSError* error = nil;
+    NSURL *url = [NSURL URLByResolvingBookmarkData:bookmark options:bookmarkOptions relativeToURL:nil bookmarkDataIsStale:nil error:&error];
 
     int isSuccess = [url startAccessingSecurityScopedResource];
     if(isSuccess == 1) {
@@ -72,9 +76,13 @@ namespace api {
     }
   }
 
-  bool LocalFile::StopAccessingSecurityScopedResource(const std::string& path) {
-    NSString* pathString = [NSString stringWithUTF8String:path.c_str()];
-    NSURL* url = [NSURL fileURLWithPath:pathString];
+  bool LocalFile::StopAccessingSecurityScopedResource(const std::string& bookmarkString) {
+    NSString* bkString = [NSString stringWithUTF8String:bookmarkString.c_str()];
+    NSData *bookmark = [[NSData alloc] initWithBase64EncodedString:bkString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+    int bookmarkOptions = NSURLBookmarkResolutionWithSecurityScope;
+    NSError* error = nil;
+    NSURL *url = [NSURL URLByResolvingBookmarkData:bookmark options:bookmarkOptions relativeToURL:nil bookmarkDataIsStale:nil error:&error];
 
     [url stopAccessingSecurityScopedResource];
     return true;

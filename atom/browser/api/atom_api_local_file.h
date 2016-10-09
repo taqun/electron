@@ -13,8 +13,8 @@ namespace api {
 /* #if defined(OS_MACOSX) */
     static std::string CreateBookmark(const std::string& path);
     static std::string ResolveBookmark(const std::string& path);
-    static int StartAccessingSecurityScopedResource(const std::string& path);
-    static bool StopAccessingSecurityScopedResource(const std::string& path);
+    static int StartAccessingSecurityScopedResource(const std::string& bookmarkString);
+    static bool StopAccessingSecurityScopedResource(const std::string& bookmarkString);
 /* #endif */
 
   };
